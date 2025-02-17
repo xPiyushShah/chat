@@ -1,21 +1,41 @@
-This file is for making real-time chat application and communication via calling or video calling using PHP.
-step 1 - install  ratchaet via composer.
-step 2 - ratchet would be server2.php to launch the server.
-step 3 - design your view and use scirpt.js for video calling and msg use your own knowledge and logic to build.
-step 4 - this is based on web socket so run - php server2.php to start web scoker server for changing ip on server file  give ypur server ip.
-step 5 - do from your own.
+# Real-Time Chat and Video Calling Application
 
-+-------------------+      +---------------------------+      +---------------------------+
-|                   |      |                           |      |                           |
-|   User Frontend   +----->|   WebSocket Server (Ratchet) +----->|   Backend (CI)         |
-|                   |      |                           |      |                           |
-+-------------------+      +---------------------------+      +---------------------------+
-       |                          |                                  |
-       |    WebSocket             |    Store Messages in DB          |    Send/Receive Messages
-       |    Connects to           |                                  |
-       |    WebSocket Server      |                                  |
-       |                          |                                  |
-       v                          v                                  v
-  Send Messages        Real-Time Message Broadcast           Save Messages to DB
-                        (check condition to make 
-                           sure reciver is well)
+This project enables real-time communication between users through text messaging and video calling using PHP and WebSockets. The server-side functionality is powered by **Ratchet**, a PHP WebSocket library, and the frontend communicates with the WebSocket server for real-time updates. The app also supports messaging functionality, ensuring efficient communication in a modern application.
+
+## Features
+
+- Real-time messaging using WebSockets
+- Video calling integration
+- Full-duplex communication for chat and video call features
+- Simple architecture and easy setup
+- User authentication and message history (with backend integration)
+
+## Prerequisites
+
+Before you start, make sure you have the following installed:
+
+- PHP (>= 7.4)
+- Composer (for managing PHP dependencies)
+- A web server (Apache or Nginx)
+- MySQL or another database (optional for storing messages)
+
+## Steps to Set Up the Application
+
+### Step 1: Install Ratchet via Composer
+
+To get started, you need to install **Ratchet** using Composer. Open your terminal and run the following command in your project directory:
+
+```bash
+composer require cboden/ratchet
+```
+----
+start server by this - in php
+$server = IoServer::factory(
+    new HttpServer(
+        new WsServer(
+            new Chat()
+        )
+    ),
+    8080,
+    'YOUR_SERVER_IP'  // Replace with your actual server IP address
+);
